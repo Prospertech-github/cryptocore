@@ -1,0 +1,234 @@
+/* Updated color palette */
+:root {
+  --primary-bg-color: #021526;
+  --secondary-bg-color: #071e33;
+  --primary-text-color: #ffffff;
+  --accent-color: #ffae00; /* You can adjust this for contrast, e.g., for buttons or highlights */
+  --box-bg-color: #333333;
+  --box-hover-bg-color: #444444;
+  --box-border-color: #555555;
+}
+
+body {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  color: var(--accent-color);
+}
+
+.platform-offers {
+  background-color: var(--secondary-bg-color);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.platform-offers h2 {
+  margin-bottom: 10px;
+}
+
+.crypto-prices {
+  background-color: var(--secondary-bg-color);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.crypto-prices h2 {
+  margin-bottom: 10px;
+}
+
+.crypto-prices input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 25px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--primary-bg-color);
+}
+
+td {
+  border-bottom: 1px solid #444;
+}
+
+.green-text {
+  color: #4caf50;
+}
+
+.red-text {
+  color: #f44336;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: var(--secondary-bg-color);
+}
+
+.carousel-container {
+  margin-top: 20px;
+}
+
+.carousel-container .offer {
+  text-align: center;
+  padding: 10px;
+  background-color: var(--primary-bg-color);
+  border-radius: 10px;
+  margin: 0 10px;
+}
+
+.carousel-container .offer img {
+  max-width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.issues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.issue-box {
+  background-color: var(--box-bg-color);
+  border: 2px solid var(--box-border-color);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.issue-box:hover {
+  background-color: var(--box-hover-bg-color);
+  transform: translateY(-5px);
+}
+
+.issue-box .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.issue-box h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.issue-box p {
+  font-size: 0.9rem;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .platform-offers h2, .crypto-prices h2 {
+    font-size: 1.25rem;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .pagination button {
+    padding: 8px;
+    margin: 2px;
+    font-size: 0.9rem;
+  }
+
+  .carousel-container .offer {
+    padding: 5px;
+    margin: 0 5px;
+  }
+
+  .carousel-container .offer img {
+    max-width: 40px;
+  }
+  .issue-box {
+    padding: 15px;
+  }
+
+  .issue-box .icon {
+    font-size: 30px;
+  }
+
+  .issue-box h3 {
+    font-size: 1rem;
+  }
+
+  .issue-box p {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 480px) {
+  th, td {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    padding: 6px;
+    margin: 1px;
+    font-size: 0.8rem;
+  }
+
+  .crypto-prices input {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
