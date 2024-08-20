@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import styles from "./Walletconnect.module.css"; // Import the CSS module
+import styles from "./WalletConnect.module.css"; // Import the CSS module
 
 function WalletConnectModal({closeModal, sendWalletAccess}) {
   const [walletType, setWalletType] = useState("");
   const [accessType, setAccessType] = useState("");
 
-  const handleWalletForm =()=>{
+  const handleWalletForm =(e)=>{
+    e.preventDefault();
     if(walletType && accessType)
       sendWalletAccess({walletType, accessType})
   }

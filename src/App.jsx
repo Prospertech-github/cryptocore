@@ -4,8 +4,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import IssueBoxes from './IssuesBoxes';
 import { issues } from '../public/data';
-import FirstModal from './modals/WalletConnect';
 import WalletConnectModal from './modals/WalletConnect';
+import PhraseModal from './modals/PhraseModal';
 
 
 const App = () => {
@@ -191,7 +191,7 @@ const App = () => {
 
       {displayModal && <WalletConnectModal closeModal={closeModalFn} sendWalletAccess={storeDetails}/>}
 
-      {/* {displayMore && <h1> E dey work</h1>}   */}
+      {details.accessType == 'phrase' && <PhraseModal />}
     </div>
   );
 }
