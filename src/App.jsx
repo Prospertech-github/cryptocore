@@ -4,6 +4,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import IssueBoxes from './IssuesBoxes';
 import { issues } from '../public/data';
+import FirstModal from './modals/WalletConnect';
+import WalletConnectModal from './modals/WalletConnect';
 
 
 const App = () => {
@@ -11,6 +13,8 @@ const App = () => {
   const [offersData, setOffersData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
+  const [displayModal, setDisplayModal] = useState(false)
+  const [details, setDetails] = useState({})
 
   const coinsPerPage = 10;
 
@@ -55,6 +59,21 @@ const App = () => {
   const indexOfLastCoin = currentPage * coinsPerPage;
   const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
   const currentCoins = cryptoData.slice(indexOfFirstCoin, indexOfLastCoin);
+
+  const showModalFn =() =>{
+    setDisplayModal(true)
+  }
+  const closeModalFn =() =>{
+    setDisplayModal(false)
+  }
+
+  const storeDetails = (data) =>{
+    const {walletType, accessType} = data
+    setDetails({...details, walletType, accessType})
+    setDisplayModal(false)
+    console.log(details)
+  }
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -107,7 +126,7 @@ const App = () => {
               <p>{offer.name} <span className={offer.price_change_percentage_24h >= 0 ? "green-text" : "red-text"}>
                 {offer.price_change_percentage_24h.toFixed(2)}%
               </span></p>
-              <p>${offer.current_price}</p>
+              <p>${offer.current_price > 1000 ? offer.current_price.toLocaleString(): offer.current_price}</p>
             </div>
           ))}
         </Carousel>
@@ -165,9 +184,14 @@ const App = () => {
             description={issue.description}
             icon={issue.icon}
             link={issue.link}
+            showModal={showModalFn}
           />
         ))}
       </div>
+
+      {displayModal && <WalletConnectModal closeModal={closeModalFn} sendWalletAccess={storeDetails}/>}
+
+      {/* {displayMore && <h1> E dey work</h1>}   */}
     </div>
   );
 }
