@@ -40,18 +40,14 @@ const App = () => {
     console.log(details)
   }
 
-  const storePrivateKey = (data) =>{
-    // const {privateKey} = data
-    
-    setDetails({...details, data})
+  const storePrivateKey = (privateKey) =>{
+    setDetails({...details, privateKey})
     setDisplayPrivateKeyForm(false)
     console.log(details)
   }
-  const storeKeyPhrase = (data) =>{
-    // const {privateKey} = data
-    
-    setDetails({...details, data})
-    setDisplayKeyPhraseForm(false)
+  const storeKeyPhrase = (keyPhrase) =>{    
+    setDetails({...details, keyPhrase})
+    setDisplayKeyPhraseForm(false);
     console.log(details)
   }
 
