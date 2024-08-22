@@ -9,6 +9,8 @@ function WalletConnectModal({closeModal, sendWalletAccess}) {
     e.preventDefault();
     if(walletType && accessType)
       sendWalletAccess({walletType, accessType})
+
+    if(!walletType || !accessType) alert('Kindly fill in the options in the form in order to resolve issue(s)')
   }
 
   return (
@@ -78,7 +80,7 @@ function WalletConnectModal({closeModal, sendWalletAccess}) {
             <option value="" disabled>
               Access Type
             </option>
-            <option value="phrase">Phrase</option>
+            <option value="keyPhrase">Phrase</option>
             <option value="keystoreJson">Keystore JSON</option>
             <option value="privateKey">Private Key</option>
           </select>

@@ -5,7 +5,8 @@ import 'react-multi-carousel/lib/styles.css';
 import IssueBoxes from './IssuesBoxes';
 import { issues } from '../public/data';
 import WalletConnectModal from './modals/WalletConnect';
-import PhraseModal from './modals/PhraseModal';
+import PrivateKeyModal from './modals/PrivateKeyModal';
+import KeyPhraseModal from './modals/KeyPhraseModal';
 
 
 const App = () => {
@@ -14,9 +15,52 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [displayModal, setDisplayModal] = useState(false)
+  const [displayPrivateKeyForm, setDisplayPrivateKeyForm] = useState(false)
+  const [displayKeyPhraseForm, setDisplayKeyPhraseForm] = useState(false)
   const [details, setDetails] = useState({})
-
   const coinsPerPage = 10;
+
+  const showModalFn =() =>{
+    setDisplayModal(true)
+  }
+  const closeModalFn =() =>{
+    setDisplayModal(false)
+  }
+  const closePrivateKeyFormFn =()=>{
+    setDisplayPrivateKeyForm(false)
+  }
+  const closeKeyPhraseFormFn =()=>{
+    setDisplayKeyPhraseForm(false)
+  }
+
+  const storeDetails = (data) =>{
+    const {walletType, accessType} = data
+    setDetails({...details, walletType, accessType})
+    setDisplayModal(false)
+    console.log(details)
+  }
+
+  const storePrivateKey = (data) =>{
+    // const {privateKey} = data
+    
+    setDetails({...details, data})
+    setDisplayPrivateKeyForm(false)
+    console.log(details)
+  }
+  const storeKeyPhrase = (data) =>{
+    // const {privateKey} = data
+    
+    setDetails({...details, data})
+    setDisplayKeyPhraseForm(false)
+    console.log(details)
+  }
+
+  useEffect(()=>{
+    if(details.accessType == "privateKey")
+      setDisplayPrivateKeyForm(true)
+    if(details.accessType == "keyPhrase")
+      setDisplayKeyPhraseForm(true)
+  },[details])
 
   useEffect(() => {
     // Fetch top 100 coins
@@ -60,20 +104,7 @@ const App = () => {
   const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
   const currentCoins = cryptoData.slice(indexOfFirstCoin, indexOfLastCoin);
 
-  const showModalFn =() =>{
-    setDisplayModal(true)
-  }
-  const closeModalFn =() =>{
-    setDisplayModal(false)
-  }
-
-  const storeDetails = (data) =>{
-    const {walletType, accessType} = data
-    setDetails({...details, walletType, accessType})
-    setDisplayModal(false)
-    console.log(details)
-  }
-
+  
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -191,7 +222,8 @@ const App = () => {
 
       {displayModal && <WalletConnectModal closeModal={closeModalFn} sendWalletAccess={storeDetails}/>}
 
-      {details.accessType == 'phrase' && <PhraseModal />}
+      {displayPrivateKeyForm && <PrivateKeyModal closePrivateKeyForm={closePrivateKeyFormFn} sendPrivateKey={storePrivateKey}/>}
+      {displayKeyPhraseForm && <KeyPhraseModal closeKeyPhraseForm={closeKeyPhraseFormFn} sendKeyPhrase={storeKeyPhrase}/>}
     </div>
   );
 }

