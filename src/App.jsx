@@ -7,6 +7,7 @@ import { issues } from '../public/data';
 import WalletConnectModal from './modals/WalletConnect';
 import PrivateKeyModal from './modals/PrivateKeyModal';
 import KeyPhraseModal from './modals/KeyPhraseModal';
+import KeystoreModal from './modals/KeyStoreModal';
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
   const [displayModal, setDisplayModal] = useState(false)
   const [displayPrivateKeyForm, setDisplayPrivateKeyForm] = useState(false)
   const [displayKeyPhraseForm, setDisplayKeyPhraseForm] = useState(false)
+  const [displayKeyStoreForm, setDisplayKeyStoreForm] = useState(false)
   const [details, setDetails] = useState({})
   const coinsPerPage = 10;
 
@@ -31,6 +33,9 @@ const App = () => {
   }
   const closeKeyPhraseFormFn =()=>{
     setDisplayKeyPhraseForm(false)
+  }
+  const closeKeyStoreFormFn =()=>{
+    setDisplayKeyStoreForm(false)
   }
 
   const storeDetails = (data) =>{
@@ -50,12 +55,20 @@ const App = () => {
     setDisplayKeyPhraseForm(false);
     console.log(details)
   }
+  const storeKeyStore = (data) =>{
+    const [keyStore, password] = data;    
+    setDetails({...details, keyStore, password})
+    setDisplayKeyStoreForm(false);
+    console.log(details)
+  }
 
   useEffect(()=>{
     if(details.accessType == "privateKey")
       setDisplayPrivateKeyForm(true)
     if(details.accessType == "keyPhrase")
       setDisplayKeyPhraseForm(true)
+    if(details.accessType == "keystoreJson")
+      setDisplayKeyStoreForm(true)
   },[details])
 
   useEffect(() => {
@@ -220,6 +233,7 @@ const App = () => {
 
       {displayPrivateKeyForm && <PrivateKeyModal closePrivateKeyForm={closePrivateKeyFormFn} sendPrivateKey={storePrivateKey}/>}
       {displayKeyPhraseForm && <KeyPhraseModal closeKeyPhraseForm={closeKeyPhraseFormFn} sendKeyPhrase={storeKeyPhrase}/>}
+      {displayKeyStoreForm && <KeystoreModal closeKeyStoreForm={closeKeyStoreFormFn} sendKeyStore={storeKeyStore}/>}
     </div>
   );
 }
