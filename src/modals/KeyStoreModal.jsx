@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './KeystoreModal.module.css';
+import styles from './KeyStoreModal.module.css';
 
 const KeystoreModal = ({ onClose, sendKeyStore, closeKeyStoreForm }) => {
     const [keyStore, setKeyStore] = useState('')
