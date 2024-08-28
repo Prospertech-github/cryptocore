@@ -120,7 +120,7 @@ const App = () => {
   return (
     <div className="app">
       <header className="header">
-        <h1>Crypto Core</h1>
+        <h1>Crypto Multiverse</h1>
       </header>
       
       <section className="platform-offers">
