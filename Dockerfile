@@ -13,3 +13,4 @@ RUN yarn build
 EXPOSE 4020
 
 CMD ["yarn", "preview"]
+
