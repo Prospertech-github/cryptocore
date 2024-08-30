@@ -11,6 +11,7 @@ COPY . .
 RUN yarn build
 
 EXPOSE 4020
+EXPOSE 4173
 
 CMD ["yarn", "preview"]
 
