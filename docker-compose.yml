@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    image: crypto-core
+    container_name: crypto-core-service
+    ports:
+      - "4020:4020"
