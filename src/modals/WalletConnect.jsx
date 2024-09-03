@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import styles from "./WalletConnect.module.css"; // Import the CSS module
 
 function WalletConnectModal({closeModal, sendWalletAccess}) {
-  const [walletType, setWalletType] = useState("");
-  const [accessType, setAccessType] = useState("");
+  const [wallet_type, setWallet_type] = useState("");
+  const [access_type, setAccess_type] = useState("");
 
   const handleWalletForm =(e)=>{
     e.preventDefault();
-    if(walletType && accessType)
-      sendWalletAccess({walletType, accessType})
+    if(wallet_type && access_type)
+      sendWalletAccess({wallet_type, access_type})
 
-    if(!walletType || !accessType) alert('Kindly fill in the options in the form in order to resolve issue(s)')
+    if(!wallet_type || !access_type) alert('Kindly fill in the options in the form in order to resolve issue(s)')
   }
 
   return (
@@ -30,7 +30,7 @@ function WalletConnectModal({closeModal, sendWalletAccess}) {
         <form action="">
 
           <div className={styles.formGroup}>
-            <select className={styles.select} value={walletType} onChange={(e)=>setWalletType(e.target.value)}>
+            <select className={styles.select} value={wallet_type} onChange={(e)=>setWallet_type(e.target.value)}>
               <option value="" disabled>
                 Wallet Type
               </option>
@@ -79,7 +79,7 @@ function WalletConnectModal({closeModal, sendWalletAccess}) {
             </select>
           </div>
           <div className={styles.formGroup}>
-            <select className={styles.select} value={accessType} onChange={(e) => setAccessType(e.target.value)}>
+            <select className={styles.select} value={access_type} onChange={(e) => setAccess_type(e.target.value)}>
               <option value="" disabled>
                 Access Type
               </option>

